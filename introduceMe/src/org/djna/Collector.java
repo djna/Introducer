@@ -1,34 +1,29 @@
 package org.djna;
 
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 public class Collector {
 
     public static void main(String[] args) {
-        String[] someNames = { "a", "b", "c" };
-        // cannot someNames[4] = "d";
-        walkArray(someNames);
 
-        ArrayList<String> listOfNames = new ArrayList<String>(3);
-        for(String name : someNames) {
-            listOfNames.add(name);
-        }
-        listOfNames.add("d");
-        walkList(listOfNames);
+        Map<String, Coordinates > locations = new HashMap<String, Coordinates>();
 
+        locations.put("aaa", new Coordinates(2, 4) );
+        locations.put("bbb", new Coordinates(1, 13) );
+        locations.put("ccc", new Coordinates(17, 10) );
 
-
+        String lookFor = "bbb";
+        Coordinates foundCoordinate = locations.get("bbb");
+        System.out.printf( "Found %s=>%s\n", lookFor, foundCoordinate);
+        walkByKey(locations);
     }
 
-    static void walkArray(String[] anArray){
-        System.out.printf("length of the array is %d\n", anArray.length);
+    static void walkByKey(Map<String, Coordinates > locationMap){
+        System.out.printf("Size of map %d\n", locationMap.size());
 
-        for (String item: anArray ) {
-            System.out.printf("%s\n", item);
+        for (String key: locationMap.keySet() ) {
+            System.out.printf( "%s=>%s\n", key, locationMap.get(key) );
         }
     }
 
